@@ -5,9 +5,19 @@ import { env } from "../env"
 const app =  fastify()
 
 app.get("/hello", async ( ) => {
-   const tables =  await knex('sqlite_schema').select('*')
+//    const transaction = await knex('transactions').insert({
+//     id:crypto.randomUUID(),
+//     title: "transaction de teste",
+//     amount: 1000,
+//    }).returning("*")
 
-   return tables
+//    return transaction
+
+const transactions = await knex('transactions')
+.select('*')
+.where('amount', 1000)
+return transactions
+
 })
 
 
